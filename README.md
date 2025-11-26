@@ -69,14 +69,17 @@ For the following experiments, `max_num_seqs` has been adjusted to improve KV ca
 
 Experiment 1: KV cache over-utilization
 ![Expt 1](img/kv_cache1.png)
+
 Over-utilization due to too batch size being too large.
 
 Experiment 3: KV cache under-utilization
 ![Expt 3](img/kv_cache2.png)
+
 Under-utilization due to reduced cache memory requirement from quantization.
 
 Experiment 6: KV cache under-utilization
 ![Expt 6](img/kv_cache3.png)
+
 Under-utilization due to introduction of speculative decoding.
 
 ## How to tune your LLM sever

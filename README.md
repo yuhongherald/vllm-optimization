@@ -4,7 +4,7 @@ In this repository, we explore how to optimize a LLM server to maximize token th
 
 To setup the environment, you can run:
 
-```
+```bash
 pip install uv
 export PATH="$HOME/.local/bin:$PATH"
 uv init
@@ -197,7 +197,7 @@ Contextual caches can greatly improve your performance if many queries are simil
 ## Experiment details
 
 The command used for our stress test is as follows:
-```
+```bash
 vllm bench serve \
     --model microsoft/Phi-4-mini-instruct \
     --port 8000 \
@@ -210,7 +210,7 @@ vllm bench serve \
 ```
 
 ### Expt 1: Baseline experiment
-```
+```bash
 vllm serve microsoft/Phi-4-mini-instruct --host 0.0.0.0 --port 8000 \
 --gpu-memory-utilization 0.9 \
 --override-generation-config '{"temperature": 0, "top_p": 1, "top_k": 1, "max_new_tokens": 512}' \
@@ -245,7 +245,7 @@ P99 ITL (ms):                            389.56
 ```
 
 ### Expt 2: Reducing max-num-seqs
-```
+```bash
 vllm serve microsoft/Phi-4-mini-instruct --host 0.0.0.0 --port 8000 \
 --gpu-memory-utilization 0.9 \
 --override-generation-config '{"temperature": 0, "top_p": 1, "top_k": 1, "max_new_tokens": 512}' \
@@ -282,7 +282,7 @@ P99 ITL (ms):                            254.91
 
 
 ### Expt 3: Reduce KV cache precision
-```
+```bash
 vllm serve microsoft/Phi-4-mini-instruct --host 0.0.0.0 --port 8000 \
 --gpu-memory-utilization 0.9 \
 --override-generation-config '{"temperature": 0, "top_p": 1, "top_k": 1, "max_new_tokens": 512}' \
@@ -320,7 +320,7 @@ P99 ITL (ms):                            209.19
 ```
 
 ### Expt 4: Increase max-num-seqs to max KV Cache utilization
-```
+```bash
 vllm serve microsoft/Phi-4-mini-instruct --host 0.0.0.0 --port 8000 \
 --gpu-memory-utilization 0.9 \
 --override-generation-config '{"temperature": 0, "top_p": 1, "top_k": 1, "max_new_tokens": 512}' \
@@ -358,7 +358,7 @@ P99 ITL (ms):                            330.58
 ```
 
 ### Expt 5: Speculative Decoding
-```
+```bash
 vllm serve microsoft/Phi-4-mini-instruct --host 0.0.0.0 --port 8000 \
 --gpu-memory-utilization 0.9 \
 --override-generation-config '{"temperature": 0, "top_p": 1, "top_k": 1, "max_new_tokens": 512}' \
@@ -397,7 +397,7 @@ P99 ITL (ms):                            426.54
 ```
 
 ### Expt 6: Removing ineffective speculated tokens
-```
+```bash
 vllm serve microsoft/Phi-4-mini-instruct --host 0.0.0.0 --port 8000 \
 --gpu-memory-utilization 0.9 \
 --override-generation-config '{"temperature": 0, "top_p": 1, "top_k": 1, "max_new_tokens": 512}' \
@@ -436,7 +436,7 @@ P99 ITL (ms):                            427.26
 ```
 
 ### Expt 7: Increase max-num-seqs to max KV Cache utilization (second time)
-```
+```bash
 vllm serve microsoft/Phi-4-mini-instruct --host 0.0.0.0 --port 8000 \
 --gpu-memory-utilization 0.9 \
 --override-generation-config '{"temperature": 0, "top_p": 1, "top_k": 1, "max_new_tokens": 512}' \
@@ -475,7 +475,7 @@ P99 ITL (ms):                            394.36
 ```
 
 ### Expt 8: Further reduce num_speculative_tokens
-```
+```bash
 vllm serve microsoft/Phi-4-mini-instruct --host 0.0.0.0 --port 8000 \
 --gpu-memory-utilization 0.9 \
 --override-generation-config '{"temperature": 0, "top_p": 1, "top_k": 1, "max_new_tokens": 512}' \
